@@ -17,9 +17,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from core.views import index
+from core.views import get_recommendations
 
 urlpatterns = [
     path('', index, name='index'),
+    path('get_recommendations', get_recommendations, name='get_recommendations'),
     path('admin/', admin.site.urls),
-
 ]
