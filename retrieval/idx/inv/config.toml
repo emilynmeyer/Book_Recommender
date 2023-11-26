@@ -1,9 +1,0 @@
-stop-words = "stopwords.txt"
-index = "idx"
-corpus = "line.toml"
-prefix = "."
-dataset = "book_desc"
-[[analyzers]]
-	filter = "default-unigram-chain"
-	method = "ngram-word"
-	ngram = 1
