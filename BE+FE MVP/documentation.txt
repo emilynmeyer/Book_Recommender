@@ -1,0 +1,13 @@
+Steps I took to build this:
+1. Moved the bestsellers_dictionary.py script into this directory
+2. Ran bestsellers_dictionary.py to update the list 
+2. Changed the retrieval code from a jupyter notebook into a python script
+3. Edited the retrieval code to make it return ISBN's 
+4. Created a basic interface with HTML + CSS + HTMX for Requests
+5. Setup a basic Flask App as the backend 
+6. Had flask app serve index.html 
+7. Created an endpoint to take in ISBN 10, ISBN 13, or a book title 
+8. Wrote a script to use google books API get that book's description
+9. Generated a query for the retreival code with the description
+10. Used returned ISBN's to call the google books api to get author, title, and thumbnail link
+11. Rendered this data on a jinja template and return it to the browser
