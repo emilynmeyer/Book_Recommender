@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BstSlrNudge</title>
+    <script src="https://unpkg.com/htmx.org@1.7.0/dist/htmx.min.js"></script>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            background-color: rgb(208, 213, 215); 
+            font-family: 'Cheltenham', 'Times New Roman', Times, serif;
+        }
+
+        #typing-title {
+            text-align: center;
+            font-size: 4em;
+            color: #343a40; 
+            margin: 20px; 
+            overflow: hidden; 
+            white-space: nowrap; 
+            display: inline-block; 
+            border-right: 2px solid #343a40; 
+            padding-right: 5px; 
+        }
+
+        #explanation {
+            text-align: center;
+            font-size: 1.8em;
+            color: #343a40; 
+            margin: 30px; 
+            opacity: 0; 
+        }
+
+        #loading {
+            font-size: 1.8em;
+        }
+
+
+
+        #user-book {
+            text-align: center;
+            font-size: 3.5em;
+            color: #000000;
+            background-color: rgb(255, 255, 255);
+            margin: 50px; 
+            opacity: 0; 
+            border: none;
+            outline: none;
+            font-family: 'Cheltenham', 'Times New Roman', Times, serif;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            max-width: 600px; 
+        }
+
+        li {
+            border-bottom: 1px solid #838080; 
+            padding: 20px;
+            font-size: 1.4em;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        img {
+            max-width: 100%; 
+            margin-top: 15px; 
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <div>
+        <h2 id="typing-title" hx-trigger="load once">BestSellerNudge</h1>
+    </div>
+    <p id="explanation" hx-trigger="load once">Give <i>us</i> a book you like; <i>you</i> get similar <b>best-sellers</b></p>
+    <form hx-get="/retrieve" hx-target="#recs" hx-indicator="#loading">
+        <input id="user-book" name="query" placeholder="ISBN or Title...">
+    </form>
+    <div id="recs"></div>
+    <div id="loading" class="htmx-indicator">Loading your recommendations!</div>
+
+    
+
+
+    <script>
+        document.addEventListener('htmx:load', function () {
+
+            var titleElement = document.getElementById('typing-title');
+            var titleText = titleElement.innerText;
+            titleElement.innerText = '';
+
+            function typeWriter(text, i, target) {
+                if (i < text.length) {
+                    target.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(function () {
+                        typeWriter(text, i, target);
+                    }, 175); 
+                }
+                else {
+                    
+                    target.style.borderRight = 'none';
+
+                 
+                    fadeIn(document.getElementById('explanation'));
+
+                    setTimeout(function () {
+                        fadeIn(document.getElementById('user-book'));
+                    }, 400);
+                    
+                    document.getElementById('user-book').focus();
+
+                }
+            }
+
+            typeWriter(titleText, 0, titleElement);
+
+        
+            function fadeIn(element) {
+                var opacity = 0;
+                var interval = setInterval(function () {
+                    if (opacity < 1) {
+                        opacity += 0.1; 
+                        element.style.opacity = opacity;
+                    } else {
+                        clearInterval(interval);
+                    }
+                }, 50); 
+            }
+        });
+    </script>
+
+</body>
+</html>
