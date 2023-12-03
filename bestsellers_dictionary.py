@@ -8,6 +8,7 @@
 import requests
 import json
 import config
+import pickle
 
 def get_NYT_BookList():
 
@@ -51,3 +52,8 @@ def google_Description(isbn):
             return ''
     else:
         return ''
+    
+book_list = get_NYT_BookList()
+
+with open('book_List.pkl', 'wb') as f:
+    pickle.dump(book_list, f)

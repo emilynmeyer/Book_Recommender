@@ -75,7 +75,11 @@
             margin-top: 15px; 
         }
 
-
+        #loading {
+            text-align: center;
+            font-family: 'Cheltenham', 'Times New Roman', Times, serif;
+            color: rgb(244, 70, 51);
+        }
     </style>
 </head>
 <body>
@@ -84,11 +88,12 @@
         <h2 id="typing-title" hx-trigger="load once">BestSellerNudge</h1>
     </div>
     <p id="explanation" hx-trigger="load once">Give <i>us</i> a book you like; <i>you</i> get similar <b>best-sellers</b></p>
-    <form hx-get="/retrieve" hx-target="#recs" hx-indicator="#loading">
+    <form hx-get="/retrieve" hx-target="#recs">
         <input id="user-book" name="query" placeholder="ISBN or Title...">
+        <div id="loading" class="htmx-indicator">Loading your recommendations!</div>
     </form>
     <div id="recs"></div>
-    <div id="loading" class="htmx-indicator">Loading your recommendations!</div>
+    
 
     
 
